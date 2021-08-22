@@ -1,29 +1,46 @@
 const express = require('express');
+const path = require('path');
 const chalk = require('../utils/chalk');
 const app = express();
 const port = 3000;
 
-app.get('', (req, res) => {
-    res.send('<h1>Welcome to Home page!</h1>');
-});
+const publicDirectoryPath = path.join(__dirname, '../public');
 
-app.get('/help', (req, res) => {
-    res.send({
-        name: 'Fuad',
-        surename: 'Suleymanov',
-        type: 'problem solving'
-    });
-});
+app.set('view engine', 'hbs');
+
+app.use(express.static(publicDirectoryPath));
+
+app.get('', (req, res) => {
+    res.render('index', {
+        title: 'Home Page',
+        header: 'Welcome to Home Page!'
+    })
+})
 
 app.get('/about', (req, res) => {
-    res.send('<h1>Wolcome to About page!</h1>');
-});
+    res.render('about', {
+        title: 'About Page',
+        header: 'Welcome to About Page!',
+        name: 'Fuad S.'
+    })
+})
+
+app.get('/help', (req, res) => {
+    res.render('help', {
+        title: 'Help Page',
+        header: 'Welcome to Help Page!',
+        type: 'Help Desk',
+        topic: 'Change Catrich'
+    })
+})
 
 app.get('/weather', (req, res) => {
-    res.send({
-        location: 'Baku',
+    res.render('weather', {
+        title: 'Weather page',
+        header: 'Welcome to Weather page!',
+        location: 'Baku, Azerbaijan',
         forecast: 'Mostly cloudy'
-    });
+    })
 });
 
 
