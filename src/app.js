@@ -4,19 +4,26 @@ const app = express();
 const port = 3000;
 
 app.get('', (req, res) => {
-    res.send('Welcome to Home page!');
+    res.send('<h1>Welcome to Home page!</h1>');
 });
 
 app.get('/help', (req, res) => {
-    res.send('Welcome to Help page!');
+    res.send({
+        name: 'Fuad',
+        surename: 'Suleymanov',
+        type: 'problem solving'
+    });
 });
 
 app.get('/about', (req, res) => {
-    res.send('Wolcome to About page!');
+    res.send('<h1>Wolcome to About page!</h1>');
 });
 
 app.get('/weather', (req, res) => {
-    res.send('Wolcome to Weather page!');
+    res.send({
+        location: 'Baku',
+        forecast: 'Mostly cloudy'
+    });
 });
 
 
