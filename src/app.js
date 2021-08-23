@@ -1,9 +1,12 @@
 const express = require('express');
 const path = require('path');
-const chalk = require('../utils/chalk');
+const chalk = require('../chalk');
 const app = express();
 const hbs = require('hbs');
 const port = 3000;
+
+const forecast = require('./utils/forecast');
+const geocode = require('./utils/geocode');
 
 // define paths for express config
 const publicDirectoryPath = path.join(__dirname, '../public');
@@ -45,15 +48,32 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
-    if(!req.query.address){
+    const address = req.query.address;
+    
+    if(!address){
         return res.send('Address must provided!');
     }
-    res.send({
-        location: 'Baku',
-        forecast: 'Mostly Cloudy',
-        address: req.query.address
+    
+
+    geocode(address, (error, {latitude, longitude, place_name} = {}) => {
+        if(error){
+            return res.send(error)
+        }
+        console.log(latitude);
+        console.log(longitude);
+        console.log(place_name);
+        forecast({latitude, longitude}, (error, forecastData) => {
+            if(error){
+                return res.send(error)
+            }
+            res.send({
+                forecast: forecastData.weather_descriptions,
+                location: place_name,
+                address: address
+            })
+            })
+        })
     })
-})
 
 app.get('/help/*', (req, res) => {
     res.render('404', {
