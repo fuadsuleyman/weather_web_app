@@ -46,6 +46,21 @@ app.get('/help', (req, res) => {
     })
 })
 
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        title: '404 Not Found',
+        error: 'Help article found 404',
+        name: 'Fuad S.'
+    })
+})
+
+app.get('*', (req, res) => {
+    res.render('404', {
+        title: '404 Not Found',
+        error: 'Page not found 404',
+        name: 'Fuad S.'
+    })
+})
 
 app.listen(port, () => {
     console.log(chalk.warning(`This app listening at http://localhost:${port}`))
