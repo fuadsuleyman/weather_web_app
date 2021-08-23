@@ -21,7 +21,7 @@ app.use(express.static(publicDirectoryPath));
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather page',
-        header: 'Welcome to Weather!',
+        header: 'Weather!',
         location: 'Baku, Azerbaijan',
         forecast: 'Mostly cloudy',
         name: 'Fuad S.'
@@ -31,7 +31,7 @@ app.get('', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About Page',
-        header: 'Welcome to About Page!',
+        header: 'About Page',
         name: 'Fuad S.'
     })
 })
@@ -39,7 +39,7 @@ app.get('/about', (req, res) => {
 app.get('/help', (req, res) => {
     res.render('help', {
         title: 'Help Page',
-        header: 'Welcome to Help Page!',
+        header: 'Help Page',
         type: 'Help Desk',
         topic: 'Change Catrich',
         name: 'Fuad S.'
