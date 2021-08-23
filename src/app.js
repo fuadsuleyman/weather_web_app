@@ -21,9 +21,7 @@ app.use(express.static(publicDirectoryPath));
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather page',
-        header: 'Weather!',
-        location: 'Baku, Azerbaijan',
-        forecast: 'Mostly cloudy',
+        header: 'Weather',
         name: 'Fuad S.'
     })
 })
@@ -43,6 +41,17 @@ app.get('/help', (req, res) => {
         type: 'Help Desk',
         topic: 'Change Catrich',
         name: 'Fuad S.'
+    })
+})
+
+app.get('/weather', (req, res) => {
+    if(!req.query.address){
+        return res.send('Address must provided!');
+    }
+    res.send({
+        location: 'Baku',
+        forecast: 'Mostly Cloudy',
+        address: req.query.address
     })
 })
 
