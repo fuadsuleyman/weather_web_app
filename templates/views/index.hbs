@@ -1,11 +1,23 @@
 {{>starting}}
 
+</head>
+<body>
+
 
     <div class="main-content">
         {{>header}}
         <p>Use this site to get Weather information</p>
-        <h4>Location: {{ location }}</h4>
-        <h4>Forecast: {{ forecast }}</h4>
+        <form>
+            <input placeholder="location" />
+            <button type="submit">Search</button>
+        </form>
+        <p id="message-1"></p>
+        <p id="message-2"></p>
+        <p id="message-3"></p>
     </div>
     
 {{>footer}}
+<script src="./js/script.js"></script>
+
+</body>
+</html>
